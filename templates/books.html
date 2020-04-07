@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            查询结果
+        </title>
+        <style>
+            body{text-align: center;} 
+            table {
+                margin: auto;
+                border: 2px solid black;
+                border-collapse: collapse;
+                width: 50%;
+            }
+
+            th, td {
+                border: 1px solid black;
+                padding: 5px;
+                text-align: center;
+            }
+
+            th {
+                background-color: lightgray;
+            }
+    </style>
+    </head>
+    <body>
+        <h1>查询结果如下</h1>
+            <table>
+            <tr>
+            <th>isbn</th>
+            <th>书名</th>
+            <th>作者</th>
+            <th>出版年份</th>
+            <th>此书链接</th>
+            </tr>
+            {% for book in books %}
+                    <tr>
+                        <td>{{book.isbn}}</td>
+                        <td>{{book.title}}</td>
+                        <td>{{book.author}}</td>
+                        <td>{{book.year}}</td>
+                        <td><a href="{{url_for('book',isbn=book.isbn)}}">点此进入</a></td>
+                    </tr>
+            {%endfor%}
+            </table><br>
+        <form action="{{ url_for('logout') }}" method="post">
+            <input type="submit" value="退出登录">
+        </form>
+    </body>
+</html>

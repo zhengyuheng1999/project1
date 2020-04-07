@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>太平洋书网</title>
+    </head>
+    <style>
+        body{text-align: center;} 
+        table {
+                margin: auto;
+                border: 2px solid black;
+                border-collapse: collapse;
+                width: 50%;
+            }
+
+            th, td {
+                border: 1px solid black;
+                padding: 5px;
+                text-align: center;
+            }
+
+            th {
+                background-color: lightgray;
+            }
+</style>
+    <body>
+        <h1>搜索引擎</h1>
+        <form action="{{ url_for('search') }}" method="post">
+            <table>
+             <tr>
+            <th>ISBN</th>
+            <th>书名</th>
+            <th>作者</th>
+            </tr>
+            <tr>
+            <td><input type="text" name="isbn"></td>
+            <td><input type="text" name="bookname"></td>
+            <td><input type="text" name="author"></td>
+            </tr>
+            </table><br>
+            <input type="submit" value="提交"><br>
+        </form><br>
+
+        <form action="{{ url_for('logout') }}" method="post">
+            <input type="submit" value="退出登录">
+        </form>
+
+    </body>
+</html>

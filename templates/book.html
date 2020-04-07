@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            {{isbn}}
+        </title>
+        <style>
+            body{text-align: center;} 
+            table {
+                margin: auto;
+                border: 2px solid black;
+                border-collapse: collapse;
+                width: 50%;
+            }
+
+            th, td {
+                border: 1px solid black;
+                padding: 5px;
+                text-align: center;
+            }
+
+            th {
+                background-color: lightgray;
+            }
+    </style>
+    </head>
+    <body>
+        <h1>此书信息如下</h1>
+        <table>
+            <tr>
+            <th>isbn</th>
+            <th>书名</th>
+            <th>作者</th>
+            <th>出版年份</th>
+            </tr>
+            <tr>
+            <td>{{book.isbn}}</td>
+            <td>{{book.title}}</td>
+            <td>{{book.author}}</td>
+            <td>{{book.year}}</td>
+            </tr>
+        </table><br>
+            {% if remarks :%}
+               <table>
+                <tr>
+                    <th>用户</th>
+                    <th>评分</th>
+                    <th>短评</th>
+                </tr>
+                {% for remark in remarks %}
+                <tr>
+                <td>{{remark.username}}</td> 
+                <td>{{remark.mark}}</td>
+                <td>{{remark.text}}</td>
+                </tr>
+                {%endfor%}
+               </table><br>
+            {% else: %}
+            No reviews.<br>
+            {% endif %}
+            {% if counter <1: %}
+            <form action="{{ url_for('comment',isbn=book.isbn) }}" method="post">
+                <div class="form-group"> 
+                评分<select class="form-control" name=mark>
+                     <option>1</option>
+                     <option>2</option>
+                     <option>3</option>
+                     <option>4</option>
+                     <option>5</option>
+                   </select>
+                 </div>
+                评语 <input type="text" name="text"><br>
+                <br><input type="submit" value="提交">
+            </form>
+            {% endif %}<br>
+            <form action="{{ url_for('logout') }}" method="post">
+                <input type="submit" value="退出登录">
+            </form>
+    </body>
+</html>
